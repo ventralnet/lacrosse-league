@@ -8,7 +8,8 @@ class Role {
     //static belongsTo = [contact:Contact]
 
     static mapping = {
-        id column 'Role_ID'
+        id column:'Role_ID'
+        version false
     }   
 
     static constraints = {
