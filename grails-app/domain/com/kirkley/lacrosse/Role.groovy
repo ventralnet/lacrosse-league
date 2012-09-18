@@ -5,8 +5,6 @@ class Role {
     Integer id
     String type
 
-    //static belongsTo = [contact:Contact]
-
     static mapping = {
         id column:'Role_ID'
         version false
