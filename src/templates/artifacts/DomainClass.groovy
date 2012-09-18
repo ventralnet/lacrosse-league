@@ -4,5 +4,6 @@
     }
 
     static mapping = {
+        version false
     }
 }
