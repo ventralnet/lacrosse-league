@@ -13,7 +13,7 @@ class Game {
     Location location
 
     //TODO confusing, why are date and time columns separated
-    Date date
+    Short date
     String time
 
     Integer homeScore
@@ -28,6 +28,7 @@ class Game {
         awayTeam column:'Away_team_ID'
         homeScore column:'Home_score'
         awayScore column:'Away_score'
+        date sqlType:'year'
         version false
     }
 }
