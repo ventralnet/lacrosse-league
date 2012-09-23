@@ -14,6 +14,7 @@ class Contact {
     Role role
 
     static constraints = {
+        emailAddress unique:true
     }
 
     static mapping = {
