@@ -14,10 +14,10 @@ class Game {
 
     //TODO confusing, why are date and time columns separated
     Short date
-    String time
+    Date time
 
-    Integer homeScore
-    Integer awayScore
+    Integer homeScore = 0
+    Integer awayScore = 0
 
     static constraints = {
     }
