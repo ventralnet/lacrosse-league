@@ -7,6 +7,5 @@ class TeamController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
-        render "hello world"
     }
 }
