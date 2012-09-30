@@ -1,0 +1,16 @@
+.team_schedule_list {
+    list-style-type: none;
+}
+
+.game_summary {
+    border-bottom: 1px solid #BDBDBD;
+    padding: 5px;
+}
+
+.game_summary:hover {
+    background-color: #6E6E6E;
+}
+
+.completed {
+    background-color: #BDBDBD;
+}
