@@ -1,3 +1,7 @@
+.rfloat {
+    float:right;
+}
+
 .team_schedule_list {
     list-style-type: none;
 }
