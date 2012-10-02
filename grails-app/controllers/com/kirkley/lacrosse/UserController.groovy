@@ -12,6 +12,12 @@ class UserController {
         redirect(controller:'team', action:'index')
     }
 
+    def register() {
+        if (request.method == 'POST') {
+            render "hello world"
+        }
+    }
+
     def logout() {
         session.user = null
         redirect(controller:'team', action:'index')

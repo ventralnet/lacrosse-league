@@ -6,8 +6,29 @@
     list-style-type: none;
 }
 
+.game_summary a:visited {
+    text-decoration:none;
+    color:black;
+    font-color:black;
+}
+.game_summary a:hover {
+    text-decoration:none;
+    color:black;
+    font-color:black;
+}
+.game_summary a:active {
+    text-decoration:none;
+    color:black;
+    font-color:black;
+}
+.game_summary a:link {
+    text-decoration:none;
+    color:black;
+    font-color:black;
+}
+
 .game_summary {
-    border-bottom: 1px solid #BDBDBD;
+    border-bottom: 1px solid grey;
     padding: 5px;
 }
 

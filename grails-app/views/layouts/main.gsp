@@ -39,7 +39,7 @@
     </g:elseif>
     <g:else>
         <div class="rfloat">
-            <a id="login_link" style="float:right" href="#">Login</a>
+            <a id="login_link" style:"display:inline" href="#">Login</a> | <g:link elementId="register_link" action="register" controller="user">Register</g:link>
         </div>
     </g:else>
 
