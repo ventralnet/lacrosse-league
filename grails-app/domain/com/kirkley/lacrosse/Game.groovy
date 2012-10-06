@@ -13,7 +13,7 @@ class Game {
     Location location
 
     //TODO confusing, why are date and time columns separated
-    Short date
+    Date date
     Date time
 
     Integer homeScore = 0
@@ -24,11 +24,12 @@ class Game {
 
     static mapping = {
         id column:'Game_ID'
-        homeTeam column:'Home_team_ID'
-        awayTeam column:'Away_team_ID'
+        homeTeam column:'Home_team'
+        awayTeam column:'Away_team'
         homeScore column:'Home_score'
         awayScore column:'Away_score'
-        date sqlType:'year'
+        date column:'Date',sqlType:'date'
+        time column:'Time',sqlType:'time'
         version false
     }
 }

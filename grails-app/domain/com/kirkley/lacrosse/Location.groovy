@@ -8,7 +8,7 @@ class Location {
     
     Contact contact
 
-    String name
+    String fieldName
 
     String street
     String city
@@ -19,8 +19,11 @@ class Location {
 
     static mapping = {
         id column:'Location_ID'
-        name column:'Location_Name'
+        fieldName column:'Field_name'
+        street column:'Street'
+        city column:'City'
         zipCode column:'Zip_code'
+        contact column:'Contact'
         version false
     }
 }

@@ -33,11 +33,11 @@ class InitDatabaseBootStrap {
                 contactPlayer.save()
                 contactPlayer2.save()
 
-                def league = new League(contact:contactAdmin,name:"LeagueA",year:2012,season:"FALL")
+                def league = new League(adminContact:contactAdmin,name:"LeagueA",year:2012,season:"FALL")
                 
                 league.save()
-                def team = new Team(league:league,contact:contactCoach)
-                def team2 = new Team(league:league,contact:contactCoach2)
+                def team = new Team(name:'Kirks',league:league,coach:contactCoach)
+                def team2 = new Team(name:'TEAM-1',league:league,coach:contactCoach2)
 
                 team.save()
                 team2.save()
@@ -55,8 +55,6 @@ class InitDatabaseBootStrap {
                 def game = new Game(homeTeam:team,awayTeam:team2,location:location,date:2012,time:new Date())
 
                 game.save()
-
-                game.errors.allErrors.each{println it}
                     
             break
         } 

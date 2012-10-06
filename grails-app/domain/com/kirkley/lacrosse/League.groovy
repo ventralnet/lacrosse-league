@@ -7,12 +7,9 @@ class League {
     Integer id
     String name
     
-    Contact contact
+    Contact adminContact
 
-    //TODO Is this a integer or datetime
-    Integer year
-
-    //TODO Is season a string?
+    Short year
     String season
 
     static constraints = {
@@ -20,6 +17,10 @@ class League {
 
     static mapping = {
         id column:'League_ID'
+        name column:'Name'
+        year column:'Year',sqlType:'year'
+        season column:'Season'
+        adminContact column:'Admin'
         version false
     }
 }

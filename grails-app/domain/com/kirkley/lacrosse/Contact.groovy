@@ -21,8 +21,9 @@ class Contact {
         id column:'Contact_ID'
         lastName column:'Last_name'
         firstName column:'First_name' 
-        emailAddress column:'email'
-        phoneNumber column:'phone'
+        emailAddress column:'Email'
+        phoneNumber column:'Phone'
+        role column:'Role'
         version false
     }
 }
