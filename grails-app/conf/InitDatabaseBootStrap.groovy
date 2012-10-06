@@ -6,9 +6,9 @@ import com.kirkley.lacrosse.*
 
 class InitDatabaseBootStrap {
 
-    static final def COACH = "COACH"
-    static final def PLAYER = "PLAYER"
-    static final def ADMIN = "ADMINISTRATOR"
+    static final def COACH = Role.COACH
+    static final def PLAYER = Role.PLAYER
+    static final def ADMIN = Role.ADMINISTRATOR
 
     def init = { servletContext -> 
         switch(GrailsUtil.environment) {
