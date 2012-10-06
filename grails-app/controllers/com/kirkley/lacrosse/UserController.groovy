@@ -1,5 +1,8 @@
 package com.kirkley.lacrosse
 
+import com.kirkley.lacrosse.Player
+import com.kirkley.lacrosse.Contact
+
 class UserController {
 
     def login() {
@@ -14,7 +17,22 @@ class UserController {
 
     def register() {
         if (request.method == 'POST') {
-            render "hello world"
+            def player = new Player()
+            def contact = new Contact(params.contact)
+            println params.contact
+            if (!contact.save()) {
+                player.contact = contact;
+                return [player:player]
+            }
+            player.properties = params
+            player.contact = contact
+            player.team = Team.findById(1)
+            if (!player.save()) {
+                return [player:player] 
+            } else {
+                session.user = player.contact //look into just having the player login if that is the case
+                redirect(controller:'team', action:'index')
+            }
         }
     }
 
