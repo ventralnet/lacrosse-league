@@ -19,9 +19,10 @@ class UserController {
         if (request.method == 'POST') {
             def player = new Player()
             def contact = new Contact(params.contact)
-            println params.contact
+            def role = Role.findByType(Role.PLAYER)
+            contact.role = role
             if (!contact.save()) {
-                player.contact = contact;
+                player.contact = contact
                 return [player:player]
             }
             player.properties = params

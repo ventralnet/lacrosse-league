@@ -10,17 +10,17 @@
             <span>First name</span>
             <input type="text" class="inputtext" name="contact.firstName" value="${player?.contact?.firstName}" tabindex="2"/><br/>
             <span>Last name</span>
-            <input type="text" class="inputtext" name="contact.lastName" value tabindex="3"/><br/>
+            <input type="text" class="inputtext" name="contact.lastName" value="${player?.contact?.lastName}" tabindex="3"/><br/>
             <span>Phone number</span>
-            <input type="text" class="inputtext" name="contact.phoneNumber" value tabindex="4"/><br/>
+            <input type="text" class="inputtext" name="contact.phoneNumber" value="${player?.contact?.phoneNumber}" tabindex="4"/><br/>
             <span>Age</span>
-            <input type="text" class="inputtext" name="age" value tabindex="5"/><br/>
+            <input type="text" class="inputtext" name="age" value="${player?.age}" tabindex="5"/><br/>
             <span>Position</span>
-            <input type="text" class="inputtext" name="position" value tabindex="6"/><br/>
+            <input type="text" class="inputtext" name="position" value="${player?.position}" tabindex="6"/><br/>
             <span>Password</span>
-            <input type="password" class="inputtext" name="contact.password" id="contact.password" tabindex="6"/><br/>
+            <input type="password" class="inputtext" name="contact.password" id="contact.password" value tabindex="7"/><br/>
             <span>Password verify</span>
-            <input type="password" class="inputtext" name="password_verify" id="password" tabindex="6"/><br/>
+            <input type="password" class="inputtext" name="password_verify" id="password" value tabindex="8"/><br/>
             <input type="submit" value="Register">
         </g:form>
     </div>
