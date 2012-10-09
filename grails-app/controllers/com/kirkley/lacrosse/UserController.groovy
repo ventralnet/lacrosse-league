@@ -15,6 +15,17 @@ class UserController {
         redirect(controller:'team', action:'index')
     }
 
+    def edit() {
+        def contact = session.user
+        def player = Player.findByContact(contact)
+
+        player.properties = params
+        contact.properties = params.contact
+        player.save()
+
+        [player:player]
+    }
+
     def register() {
         if (request.method == 'POST') {
             def player = new Player()

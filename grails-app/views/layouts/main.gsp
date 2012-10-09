@@ -18,7 +18,6 @@
     </head>
 
     <body>
-    <h1 style="display:inline">The Baltimore Kirks</h1>
 
     <g:if test="${session.user}">
            <div style="float:right">Welcome, ${session.user.firstName} <g:link action="logout" controller="user">Logout</g:link></div> 
@@ -51,6 +50,17 @@
                 <input type="submit" value="Login">
             </g:form>
         </div>
+    </div>
+
+    <h1 style="display:inline">The Baltimore Kirks</h1>
+
+    <div id="nav_menu" class="float:left">
+        <ul>
+            <li><g:link controller="team">Team Schedule</g:link></li>
+            <g:if test="${session.user}">
+                <li><g:link controller="user" action="edit">Edit Profile</g:link></li>
+            </g:if>
+        </ul>
     </div>
 
     <g:layoutBody/>
