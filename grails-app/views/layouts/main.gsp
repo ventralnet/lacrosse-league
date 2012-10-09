@@ -57,6 +57,7 @@
     <div id="nav_menu" class="float:left">
         <ul>
             <li><g:link controller="team">Team Schedule</g:link></li>
+            <li><g:link controller="team">League Standings</g:link></li>
             <g:if test="${session.user}">
                 <li><g:link controller="user" action="edit">Edit Profile</g:link></li>
             </g:if>
