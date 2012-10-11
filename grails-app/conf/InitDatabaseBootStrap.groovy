@@ -110,10 +110,10 @@ class InitDatabaseBootStrap {
 
 
                 Collections.shuffle(TEAM_NAMES)
-                def summerTeams = []
+                def fallTeams = []
                 TEAM_NAMES.each { teamName ->
                     def team = new Team(name:teamName,league:league,coach:createContact(coachRole)).save()
-                    summerTeams << team
+                    fallTeams << team
                     team.save()
                 }
                 TEAM_NAMES.each { teamName ->
@@ -135,22 +135,22 @@ class InitDatabaseBootStrap {
                 def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th",city:"Cockeysville",zipCode:"21030")
                 save(location,location2,location3,location4)
     
-                summerTeams.each { team ->
+                fallTeams.each { team ->
                     createTeamRoster(team)
                 }
 
                 def now = System.currentTimeMillis()
                 def day = 86400000 / 2
-                def kirksTeam = Team.findByName('Kirks')
-                new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:summerTeams[1],location:location,date:2012,time:new Date(now-(day*6) as Long)).save()
-                new Game(homeScore:6,awayScore:4,homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-day as Long)).save()
-                new Game(homeScore:3,awayScore:8,homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-(day*3) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:summerTeams[1],location:location,date:2012,time:new Date(now as Long)).save()
-                new Game(homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+day as Long)).save()
-                new Game(homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+(day*3) as Long)).save()
-                new Game(homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location4,date:2012,time:new Date(now+(day*4) as Long)).save()
-                new Game(homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location3,date:2012,time:new Date(now+(day*5) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:summerTeams[4],location:location,date:2012,time:new Date(now+(day*6) as Long)).save()
+                def kirksTeam = fallTeams.find { it.name = 'Kirks' }
+                new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,date:2012,time:new Date(now-(day*6) as Long)).save()
+                new Game(homeScore:6,awayScore:4,homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-day as Long)).save()
+                new Game(homeScore:3,awayScore:8,homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-(day*3) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,date:2012,time:new Date(now as Long)).save()
+                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+day as Long)).save()
+                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+(day*3) as Long)).save()
+                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location4,date:2012,time:new Date(now+(day*4) as Long)).save()
+                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location3,date:2012,time:new Date(now+(day*5) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[4],location:location,date:2012,time:new Date(now+(day*6) as Long)).save()
                     
             break
         } 

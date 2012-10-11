@@ -14,10 +14,10 @@ class TeamController {
 
     def roster() {
         if (session.user) {
-            def league = League.findByYearAndSeason(2012,'SUMMER')
+            def league = League.findByYearAndSeason(2012,'FALL')
             def team = Team.findByNameAndLeague('Kirks',league)
             def players = Player.findAllByTeam(team)
-            render "${team.id}   ${players.size()}"
+            render "${players.getClass()}          ${team.id}   ${players.size()}"
             //def players = Player.findByTeam(team)
             //def players = Player.findByTeam(team)
         }
