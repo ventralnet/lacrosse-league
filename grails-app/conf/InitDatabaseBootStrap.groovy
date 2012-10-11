@@ -20,7 +20,7 @@ class InitDatabaseBootStrap {
 
     static final def TEAM_NAMES = ['Kirks','Tigers','Jags','Lions','Bros']
 
-    static final def LAST_NAMES = ['Doe','Russo','Soprano','Hacket','Brown','Castle','Frink','Chen','Smith','Jones','Kirkley','Henry','McCloud','Myers','McKnight','Lewis','Black','Matthews','Mu','Smyth']
+    static final def LAST_NAMES = ['Doe','Russo','Soprano','Hacket','Brown','Castle','Frink','Chen','Smith','Jones','Henry','McCloud','Myers','McKnight','Lewis','Black','Matthews','Mu','Smyth']
     static final def FIRST_NAMES = ['Jeremy','Buck','Grant','Joe','Jon','Matthew','Joshua','Matt','Jim','Michael','Justin','Valerie','Jacob','David','Chris','Richard']
 
     def coachRole
@@ -91,9 +91,16 @@ class InitDatabaseBootStrap {
 
                 def contactAdmin = createContact(administratorRole)
                 def contactAdmin2 = createContact(administratorRole)
+                def contactCoach = createContact(coachRole)
+                def contactCoach2 = createContact(coachRole)
                 def contactPlayer = createContact(parentPlayerRole)
                 def contactPlayer2 = createContact(parentPlayerRole)
                 def contactPlayer3 = createContact(parentPlayerRole)
+
+                def me = new Contact(lastName:'Kirkley',firstName:'Matthew',
+                                                  emailAddress:'matt.kirkley@gmail.com', phoneNumber:randomPhoneNumber(), password:"secret",role:coachRole)
+                me.save()
+
 
                 def league = new League(adminContact:contactAdmin,name:"Fall League",year:2012,season:"FALL")
                 def league2 = new League(adminContact:contactAdmin2,name:"Summer League",year:2012,season:"SUMMER")
