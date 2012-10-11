@@ -8,7 +8,7 @@ class InitDatabaseBootStrap {
 
     static {
         ArrayList.metaClass.random = { 
-            return delegate[0]
+            return delegate[new Random().nextInt(delegate.size()-1)]
         }
     }
 
@@ -18,10 +18,10 @@ class InitDatabaseBootStrap {
     static final def PLAYER = Role.PLAYER
     static final def ADMIN = Role.ADMINISTRATOR
 
-    static final def TEAM_NAMES = ['Kirks','Tigers','Jags','Lions']
+    static final def TEAM_NAMES = ['Kirks','Tigers','Jags','Lions','Bros']
 
-    static final def LAST_NAMES = ['Smith','Jones','Kirkley','Henry','McCloud','Myers','McKnight','Lewis','Black','Matthews','Mu','Smyth']
-    static final def FIRST_NAMES = ['Matt','Jim','Michael','Justin','Valerie','Jacob','David','Chris','Richard']
+    static final def LAST_NAMES = ['Doe','Russo','Soprano','Hacket','Brown','Castle','Frink','Chen','Smith','Jones','Kirkley','Henry','McCloud','Myers','McKnight','Lewis','Black','Matthews','Mu','Smyth']
+    static final def FIRST_NAMES = ['Jeremy','Buck','Grant','Joe','Jon','Matthew','Joshua','Matt','Jim','Michael','Justin','Valerie','Jacob','David','Chris','Richard']
 
     def coachRole
     def parentPlayerRole
@@ -29,7 +29,13 @@ class InitDatabaseBootStrap {
 
     private def randomPhoneNumber() {
         def n = { numDigits ->
-            random.nextInt(numDigits) 
+            def s = ""
+            numDigits.times { s+="9" }
+            int val = random.nextInt(s as Integer) 
+            while (val.toString().length() < numDigits) {
+                val = random.nextInt(s as Integer) 
+            }
+            val
         }
         "(${n(3)})-${n(3)}-${n(4)}"
     }
@@ -50,24 +56,32 @@ class InitDatabaseBootStrap {
     }
 
     private def createContact(role) {
-        def lastname = LAST_NAMES.random()
-        def firstname = FIRST_NAMES.random()
-        def contactAdmin = new Contact(lastName:lastname,firstName:firstname, 
-                              emailAddress:randomEmail(firstname,lastname), phoneNumber:randomPhoneNumber(), password:"secret",role:administratorRole) 
-        contactAdmin.save()
-        contactAdmin
+        def contact = null
+        while (!contact || !contact.save()) {
+            def lastname = LAST_NAMES.random()
+            def firstname = FIRST_NAMES.random()
+            contact = new Contact(lastName:lastname,firstName:firstname, 
+                                  emailAddress:randomEmail(firstname,lastname), phoneNumber:randomPhoneNumber(), password:"secret",role:role) 
+        }
+        contact
     }
 
-    private def createLeagues(contact) {
-        def league = new League(adminContact:contact,name:"Summer League",year:2012,season:"SUMMER")
-        def league2 = new League(adminContact:contact,name:"Winter League",year:2012,season:"WINTER")
-        def league3 = new League(adminContact:contact,name:"Fall League",year:2012,season:"FALL")
-        def league4 = new League(adminContact:contact,name:"Spring League",year:2012,season:"SPRING")
+    private def createTeamRoster(team) {
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Attack").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Attack").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Attack").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Defense").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Defense").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Defense").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Midfield").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Midfield").save()
+        new Player(contact:createContact(parentPlayerRole),team:team,age:17,position:"Midfield").save()
+    }
 
-        league.save()
-        league2.save()
-        league3.save()
-        league4.save()
+    private def save(Object ... items) {
+        items.each {
+            it.save()
+        }
     }
 
     def init = { servletContext -> 
@@ -76,46 +90,60 @@ class InitDatabaseBootStrap {
                 def (coachRole,parentPlayerRole,administratorRole) = createRoles()
 
                 def contactAdmin = createContact(administratorRole)
-                def contactCoach = createContact(coachRole)
-                def contactCoach2 = createContact(coachRole)
+                def contactAdmin2 = createContact(administratorRole)
                 def contactPlayer = createContact(parentPlayerRole)
                 def contactPlayer2 = createContact(parentPlayerRole)
                 def contactPlayer3 = createContact(parentPlayerRole)
 
+                def league = new League(adminContact:contactAdmin,name:"Fall League",year:2012,season:"FALL")
+                def league2 = new League(adminContact:contactAdmin2,name:"Summer League",year:2012,season:"SUMMER")
+                def league3 = new League(adminContact:contactAdmin,name:"Spring League",year:2012,season:"SPRING")
+                def league4 = new League(adminContact:contactAdmin2,name:"Winter League",year:2012,season:"WINTER")
+                save(league,league2,league3,league4) 
 
 
-//                def league = new League(adminContact:contactAdmin,name:"LeagueA",year:2012,season:"FALL")
-//                def league2 = new League(adminContact:contactAdmin,name:"LeagueB",year:2012,season:"SUMMER")
-//                
-//                league.save()
-//                league2.save()
-//
-//                def team = new Team(name:'Kirks',league:league,coach:contactCoach)
-//                def team2 = new Team(name:'TEAM-1',league:league,coach:contactCoach2)
-//                def team3 = new Team(name:'TEAM-2',league:league,coach:contactCoach2)
-//                def team4 = new Team(name:'TEAM-3',league:league,coach:contactCoach2)
-//                def team5 = new Team(name:'TEAM-4',league:league2,coach:contactCoach) 
-//                
-//                team.save()
-//                team2.save()
-//                team3.save()
-//                team4.save()
-//                team5.save()
-//
-//                def player1 = new Player(contact:contactPlayer,team:team,age:21,position:"Attack")
-//                def player2 = new Player(contact:contactPlayer2,team:team,age:18,position:"Midfield")
-//                def player3 = new Player(contact:contactPlayer3,team:team,age:18,position:"Defense")
-//
-//                player1.save()
-//                player2.save()
-//
-//                def location = new Location(contact:contactCoach,name:"loc_name",street:"cleghorn",city:"huntvalley",zipCode:"21030")
-//
-//                location.save()
-//
-//                def game = new Game(homeTeam:team,awayTeam:team2,location:location,date:2012,time:new Date())
-//
-//                game.save()
+                Collections.shuffle(TEAM_NAMES)
+                def summerTeams = []
+                TEAM_NAMES.each { teamName ->
+                    def team = new Team(name:teamName,league:league,coach:createContact(coachRole)).save()
+                    summerTeams << team
+                    team.save()
+                }
+                TEAM_NAMES.each { teamName ->
+                    def team = new Team(name:teamName,league:league2,coach:createContact(coachRole)).save()
+                    team.save()
+                }
+                TEAM_NAMES.each { teamName ->
+                    def team = new Team(name:teamName,league:league3,coach:createContact(coachRole)).save()
+                    team.save()
+                }
+                TEAM_NAMES.each { teamName ->
+                    def team = new Team(name:teamName,league:league4,coach:createContact(coachRole)).save()
+                    team.save()
+                }
+
+                def location = new Location(contact:createContact(coachRole),fieldName:"Seminary",street:"Alley",city:"Timonium",zipCode:"22121")
+                def location2 = new Location(contact:createContact(coachRole),fieldName:"Heights",street:"Lutherville",city:"CityPlace",zipCode:"22131")
+                def location3 = new Location(contact:createContact(coachRole),fieldName:"Grass Field",street:"3rd",city:"Baltimore",zipCode:"22122")
+                def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th",city:"Cockeysville",zipCode:"21030")
+                save(location,location2,location3,location4)
+    
+                summerTeams.each { team ->
+                    createTeamRoster(team)
+                }
+
+                def now = System.currentTimeMillis()
+                def day = 86400000 / 2
+                def kirksTeam = Team.findByName('Kirks')
+                new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:summerTeams[1],location:location,date:2012,time:new Date(now-(day*6) as Long)).save()
+                new Game(homeScore:6,awayScore:4,homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-day as Long)).save()
+                new Game(homeScore:3,awayScore:8,homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now-(day*3) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:summerTeams[1],location:location,date:2012,time:new Date(now as Long)).save()
+                new Game(homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+day as Long)).save()
+                new Game(homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location2,date:2012,time:new Date(now+(day*3) as Long)).save()
+                new Game(homeTeam:summerTeams[2],awayTeam:kirksTeam,location:location4,date:2012,time:new Date(now+(day*4) as Long)).save()
+                new Game(homeTeam:summerTeams[3],awayTeam:kirksTeam,location:location3,date:2012,time:new Date(now+(day*5) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:summerTeams[4],location:location,date:2012,time:new Date(now+(day*6) as Long)).save()
                     
             break
         } 
