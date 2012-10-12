@@ -29,6 +29,7 @@
                     <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
                     <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
                     <input type="submit" value="Login">
+                     | <g:link elementId="register_link" action="register" controller="user">Register</g:link>
                 </g:form>
             </div>
         </div>
