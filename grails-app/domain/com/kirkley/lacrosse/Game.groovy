@@ -12,7 +12,6 @@ class Game {
 
     Location location
 
-    //TODO confusing, why are date and time columns separated
     Date date
     Date time
 

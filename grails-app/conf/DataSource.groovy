@@ -13,9 +13,9 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             loggingSql = true
-            url = "jdbc:mysql://localhost:3306/league"
+            url = "jdbc:mysql://localhost:3306/matt_lacrosse"
         }
     }
     test {

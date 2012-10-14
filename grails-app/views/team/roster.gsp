@@ -1,9 +1,7 @@
 <html>
     <meta name="layout" content="main"/>
 
-    <h1>Game schedule</h1>
-
-    <p>The Kirks Roster</p>
+    <h1>Kirks Team Roster</h1>
 
     <table>
         <g:each in="${players}">
