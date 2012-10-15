@@ -26,10 +26,22 @@
         <div class="rfloat">
             <div class="login_container_error">
                 <g:form name="loginForm" action="login" url="[controller: 'user', action:'login']">
-                    <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
-                    <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
-                    <input type="submit" value="Login">
-                     | <g:link elementId="register_link" action="register" controller="user">Register</g:link>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
+                            </td>
+                            <td>
+                                <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
+                            </td>
+                            <td>
+                                <input type="submit" value="Login">
+                            </td>
+                            <td>
+                               <g:link elementId="register_link" action="register" controller="user">Register</g:link> 
+                            </td>
+                        </tr>
+                    </table>
                 </g:form>
             </div>
         </div>
@@ -39,16 +51,38 @@
     </g:elseif>
     <g:else>
         <div class="rfloat">
-            <a id="login_link" style:"display:inline" href="#">Login</a> | <g:link elementId="register_link" action="register" controller="user">Register</g:link>
+            <table>
+                <tr>
+                    <td>
+                        <a id="login_link" style:"display:inline" href="#">Login</a>
+                    </td>
+                    <td>
+                        <g:link elementId="register_link" action="register" controller="user">Register</g:link>
+                    </td>
+                </tr>
+            </table>
         </div>
     </g:else>
 
     <div class="rfloat">
         <div class="login_container">
             <g:form name="loginForm" action="login" url="[controller: 'user', action:'login']">
-                <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
-                <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
-                <input type="submit" value="Login">
+                <table>
+                    <tr>
+                        <td>
+                            <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
+                        </td>
+                        <td>
+                            <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
+                        </td>
+                        <td>
+                            <input type="submit" value="Login">
+                        </td>
+                        <td>
+                           <g:link elementId="register_link" action="register" controller="user">Register</g:link> 
+                        </td>
+                    </tr>
+                </table>
             </g:form>
         </div>
     </div>
