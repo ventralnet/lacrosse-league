@@ -87,6 +87,7 @@ class InitDatabaseBootStrap {
     def init = { servletContext -> 
         switch(GrailsUtil.environment) {
             case "development":
+            case "production":
                 def (coachRole,parentPlayerRole,administratorRole) = createRoles()
 
                 def contactAdmin = createContact(administratorRole)
