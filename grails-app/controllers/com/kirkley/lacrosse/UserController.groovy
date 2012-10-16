@@ -2,6 +2,7 @@ package com.kirkley.lacrosse
 
 import com.kirkley.lacrosse.Player
 import com.kirkley.lacrosse.Contact
+import com.kirkley.lacrosse.Role
 
 class UserController {
 
@@ -17,13 +18,39 @@ class UserController {
 
     def edit() {
         def contact = session.user
-        def player = Player.findByContact(contact)
+        def player = null
+        if (params.id) {
+            if (request.method == 'POST') {
+                player = Player.findById(id)
+                contact = player.contact
+                contact.properties = params
+                player.properties = params.player
+            } else {
+                return renderEditProfile(params.id)
+            }
+        } else {
+            //editing own profile
+            contact.attach()
+            if (contact.role.type == Role.PLAYER) {
+                player = Player.findByContact(contact)
+            }
+            if (request.method == 'POST') {
+                contact.properties = params
+                contact.save()
+                if (contact.role.type == Role.PLAYER) {
+                    player.properties = params.player
+                    player.save()
+                }
+                session.user = contact
+            }
+            [contact:contact,player:player]
+        }
+    }
 
-        player.properties = params
-        contact.properties = params.contact
-        player.save()
-
-        [player:player]
+    private def renderEditProfile(id) {
+        def player = Player.findById(id)
+        def contact = player.contact
+        [player:player,contact:contact]
     }
 
     def register() {

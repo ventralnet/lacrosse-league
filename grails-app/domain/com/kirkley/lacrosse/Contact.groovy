@@ -23,7 +23,7 @@ class Contact {
         firstName column:'First_name' 
         emailAddress column:'Email'
         phoneNumber column:'Phone'
-        role column:'Role'
+        role column:'Role',lazy:false
         version false
     }
 }
