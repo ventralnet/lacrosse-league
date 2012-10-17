@@ -1,46 +1,8 @@
-.rfloat {
-    float:right;
+#team_name_header {
+	float:left;	
 }
 
-#body {
-    padding-bottom: 50px;
-}
-
-.team_schedule_list {
-    list-style-type: none;
-}
-
-/*
-.game_summary a:visited {
-    text-decoration:none;
-    color:black;
-    font-color:black;
-}
-.game_summary a:hover {
-    text-decoration:none;
-    color:black;
-    font-color:black;
-}
-.game_summary a:active {
-    text-decoration:none;
-    color:black;
-    font-color:black;
-}
-.game_summary a:link {
-    text-decoration:none;
-    color:black;
-    font-color:black;
-}
-*/
-
-table {
-    border-collapse: collapse;
-
-}
-.game_summary_row td{
-    padding-right:4em;
-}
-
-.completed {
-    background-color: #BDBDBD;
+#login_container {
+	background-color: blue;
+	float:right;	
 }
