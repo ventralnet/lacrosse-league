@@ -7,15 +7,16 @@ import com.kirkley.lacrosse.League
 
 class TeamController {
 
-    def leagueService
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def teamService
+    def gameService
 
     def index() {
+        def games = gameService.getGameSchedule()    
+        [games: games]
     }
 
     def roster() {
-        def league = leagueService.getCurrentLeague()
-        def team = Team.findByNameAndLeague('Kirks',league)
+        def team = teamService.getTeam()
         def players = Player.findAllByTeam(team)
         [players:players]
     }

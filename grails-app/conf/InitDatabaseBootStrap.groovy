@@ -146,15 +146,21 @@ class InitDatabaseBootStrap {
                 def cal = Calendar.instance
                 cal.set(Calendar.YEAR,2012)
                 def year2012 = cal.time
-                def game = new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,date:2012,time:new Date(now-(day*6) as Long))
-                new Game(homeScore:6,awayScore:4,homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,date:year2012,time:new Date(now-day as Long)).save()
-                new Game(homeScore:3,awayScore:8,homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,date:year2012,time:new Date(now-(day*3) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,date:year2012,time:new Date(now as Long)).save()
-                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,date:year2012,time:new Date(now+day as Long)).save()
-                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,date:year2012,time:new Date(now+(day*3) as Long)).save()
-                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location4,date:year2012,time:new Date(now+(day*4) as Long)).save()
-                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location3,date:year2012,time:new Date(now+(day*5) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[4],location:location,date:year2012,time:new Date(now+(day*6) as Long)).save()
+                cal.set(Calendar.MINUTE,30)
+                cal.set(Calendar.HOUR, 6)
+                cal.set(Calendar.AM_PM, Calendar.PM)
+                def sixThirty = cal.time
+                cal.set(Calendar.MINUTE, 0)
+                def six = cal.time
+                def game = new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now-(day*6.33) as Long))
+                new Game(homeScore:6,awayScore:4,homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-day as Long)).save()
+                new Game(homeScore:3,awayScore:8,homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-(day*3) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now as Long)).save()
+                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:six,date:new Date(now+day as Long)).save()
+                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now+(day*3) as Long)).save()
+                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location4,time:six,date:new Date(now+(day*4) as Long)).save()
+                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location3,time:sixThirty,date:new Date(now+(day*5) as Long)).save()
+                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[4],location:location,time:six,date:new Date(now+(day*6) as Long)).save()
                     
             break
         } 
