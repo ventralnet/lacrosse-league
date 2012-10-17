@@ -3,8 +3,6 @@
 
 <h1>Game schedule</h1>
 
-<p>Click a game for location information</p>
-
 <table>
 <g:each in="${games}">
     <g:set var="gameComplete" value="${it.homeScore != 0 || it.awayScore != 0}" />
