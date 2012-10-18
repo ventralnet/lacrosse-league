@@ -143,6 +143,9 @@ class InitDatabaseBootStrap {
                 def now = System.currentTimeMillis()
                 def day = 86400000 / 2
                 def kirksTeam = fallTeams.find { it.name = 'Kirks' }
+                def players = Player.findAllByTeam(kirksTeam)
+                println "*******************************"
+                players.each { println it.contact.role.type }
                 def cal = Calendar.instance
                 cal.set(Calendar.YEAR,2012)
                 def year2012 = cal.time
