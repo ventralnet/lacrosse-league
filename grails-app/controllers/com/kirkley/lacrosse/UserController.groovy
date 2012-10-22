@@ -27,6 +27,7 @@ class UserController {
                 contact = player.contact
                 contact.properties = params
                 player.properties = params.player
+                contact.save()
             } else {
                 return renderEditProfile(params.id)
             }
