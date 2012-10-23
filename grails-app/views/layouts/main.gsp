@@ -94,7 +94,7 @@
                 <li><g:link controller="league" action="standings">League Standings</g:link></li>
                 <li><g:link controller="team" action="roster">Team Roster</g:link></li>
                 <g:if test="${session.user}">
-                    <li><g:link controller="user" action="edit">Edit Profile</g:link></li>
+                    <li><g:link controller="user" action="edit" id="${session.user.id}">Edit Profile</g:link></li>
                 </g:if>
             </ul>
         </div>

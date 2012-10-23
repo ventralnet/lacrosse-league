@@ -19,35 +19,35 @@ class UserController {
     }
 
     def edit() {
-        def contact = session.user
+        if (!session.user) {
+            throw new RuntimeException("NOT LOGGED IN")
+        }
+        def contact = null
         def player = null
         if (params.id) {
             if (request.method == 'POST') {
-                player = Player.findById(id)
-                contact = player.contact
-                contact.properties = params
-                player.properties = params.player
-                contact.save()
-            } else {
-                return renderEditProfile(params.id)
-            }
-        } else {
-            //editing own profile
-            contact.attach()
-            if (contact.role.type == Role.PLAYER) {
-                player = Player.findByContact(contact)
-            }
-            if (request.method == 'POST') {
-                contact.properties = params
-                contact.save()
+                if (session.user.id != params.id && session.user.role.type != Role.COACH) {
+                    throw new RuntimeException("UNAUTHORIZED")
+                }
+                contact = Contact.findById(params.id)
                 if (contact.role.type == Role.PLAYER) {
+                    player = Player.findByContact(contact)
                     player.properties = params.player
                     player.save()
                 }
-                session.user = contact
-            }
-            [contact:contact,player:player]
+                contact.properties = params
+                contact.save()
+                if (session.user.id == params.id) {
+                    session.user = contact
+                }
+            } else {
+                contact = Contact.findById(params.id)
+                player = Player.findByContact(contact)
+            }   
+        } else {
+            throw new RuntimeException("No id specified")
         }
+        [contact:contact,player:player]
     }
 
     private def renderEditProfile(id) {
