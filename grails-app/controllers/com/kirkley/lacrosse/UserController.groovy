@@ -56,19 +56,22 @@ class UserController {
         [player:player,contact:contact]
     }
 
-    def register() {
+    def register = { UserRegistrationCommand urc ->
         if (request.method == 'POST') {
-            def player = new Player()
-            def contact = new Contact(params.contact)
-            def role = Role.findByType(Role.PLAYER)
-            contact.role = role
-            contact.save()
-            player.properties = params
-            player.contact = contact
-            player.team = teamService.getTeam()
-            player.save()
-            session.user = player.contact
-            redirect(controller:'team', action:'index')
+            if (urc.hasErrors()) {
+                return [ user : urc ]
+            } else {
+                def contact = new Contact(urc.properties)
+                contact.role = Role.findByType(Role.PLAYER)
+                contact.save()
+                def player = new Player()
+                player.age = urc.age
+                player.contact = contact
+                player.team = teamService.getTeam()
+                player.save()
+                session.user = player.contact
+                redirect(controller:'team',action:'index')
+            }   
         }
     }
 
@@ -77,5 +80,25 @@ class UserController {
         redirect(controller:'team', action:'index')
     }  
 
-    def index() { }
+    class UserRegistrationCommand {
+        String emailAddress
+        String password
+        String passwordConfirm
+        String firstName
+        String lastName
+        String phoneNumber
+        
+        Short age
+        String position
+        
+        static constraints = {
+            password(blank:false)
+            passwordConfirm(blank:false,
+                validator: { passwordConfirm, userRegistrationCommand ->
+                     return passwordConfirm == userRegistrationCommand.password
+                })
+            emailAddress(email:true)
+        }
+    }
+    
 }
