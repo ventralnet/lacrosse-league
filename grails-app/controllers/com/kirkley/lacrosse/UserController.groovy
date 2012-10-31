@@ -80,25 +80,40 @@ class UserController {
         redirect(controller:'team', action:'index')
     }  
 
-    class UserRegistrationCommand {
-        String emailAddress
-        String password
-        String passwordConfirm
-        String firstName
-        String lastName
-        String phoneNumber
-        
-        Short age
-        String position
-        
-        static constraints = {
-            password(blank:false)
-            passwordConfirm(blank:false,
-                validator: { passwordConfirm, userRegistrationCommand ->
-                     return passwordConfirm == userRegistrationCommand.password
-                })
-            emailAddress(email:true)
-        }
-    }
     
+}
+
+class UserRegistrationCommand {
+    String emailAddress
+    String password
+    String passwordConfirm
+    String firstName
+    String lastName
+    String phoneNumber
+    
+    Short age
+    String position
+    
+    static constraints = {
+        age(blank:false)
+        position(blank:false)
+        firstName(blank:false)
+        lastName(blank:false)
+        phoneNumber(blank:false)
+        password(blank:false)
+        passwordConfirm(
+            validator: { passwordConfirm, userRegistrationCommand ->
+                 if (passwordConfirm != userRegistrationCommand.password) {
+                    return ["passwordmatch"]
+                 }
+            })
+        
+        emailAddress(email:true,
+            validator: { enteredEmail, userRegistrationCommand ->
+                def contact = Contact.findByEmailAddress(enteredEmail)
+                if (contact) {
+                    return ["emailunique"]
+                }   
+            })
+    }
 }
