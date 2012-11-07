@@ -136,13 +136,14 @@ class InitDatabaseBootStrap {
                 def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th",city:"Cockeysville",zipCode:"21030")
                 save(location,location2,location3,location4)
     
+                def kirksTeam = fallTeams.find { it.name = 'Kirks' }
                 fallTeams.each { team ->
-                    createTeamRoster(team)
+                    if (team != kirksTeam)  
+                        createTeamRoster(team)
                 }
 
                 def now = System.currentTimeMillis()
                 def day = 86400000 / 2
-                def kirksTeam = fallTeams.find { it.name = 'Kirks' }
                 def players = Player.findAllByTeam(kirksTeam)
                 def cal = Calendar.instance
                 cal.set(Calendar.YEAR,2012)
