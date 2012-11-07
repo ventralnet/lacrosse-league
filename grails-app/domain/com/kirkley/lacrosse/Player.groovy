@@ -21,6 +21,7 @@ class Player {
 
     static mapping = {
         id column:'Player_ID'
+        contact cascade: 'all'
         version false
     }
 }
