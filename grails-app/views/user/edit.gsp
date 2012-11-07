@@ -35,7 +35,7 @@
 				<tr>
 					<td><span>Position</span></td>
 					<td>
-                        <g:select name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="${player?.position}"
+                        <g:select tabindex="6" name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="${player?.position}"
                             /></br>
 						</td>
 				</tr>
@@ -43,15 +43,15 @@
 			<tr>
 				<td><span>Password</span></td>
 				<td><input type="password" class="inputtext" name="password"
-					id="contact?.password" value tabindex="7" /><br /></td>
+					id="password" value="${contact?.password}" tabindex="7" /><br /></td>
 			</tr>
 			<tr>
 				<td><span>Password verify</span></td>
 				<td><input type="password" class="inputtext"
-					name="password_verify" id="password" value tabindex="8" /><br /></td>
+					name="password_verify" id="password_verify" value="${contact?.password}" tabindex="8" /><br /></td>
 			</tr>
 		</table>
-		<input type="submit" value="Update">
+		<input tabindex="8" type="submit" value="Update">
 	</g:form>
     </div>
 

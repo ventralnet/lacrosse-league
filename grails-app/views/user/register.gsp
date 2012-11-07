@@ -77,7 +77,7 @@
                         <span>Position</span>
                     </td>
                     <td>
-                        <g:select name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="Attack"
+                        <g:select tabindex="6" name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="Attack"
                             /></br>
                     </td>
                     <td>
@@ -114,7 +114,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <input type="submit" value="Register">
+                        <input tabindex="9" type="submit" value="Register">
                     </td>
                 </tr>
             </table>
