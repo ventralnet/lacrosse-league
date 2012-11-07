@@ -26,7 +26,7 @@
 
     <body>
 
-        <div id="body">
+        <div id="main_container">
     
             <div id="header">
                 <div style="float:left" id="team_name_header">
@@ -84,7 +84,6 @@
                 </g:else>
             </div>
 
-        </div>
 
         <div style="clear:both"/>
 
@@ -103,6 +102,7 @@
         <div style="clear:both"/>
 
         <g:layoutBody/>
+        </div>
     </body>
 
 
