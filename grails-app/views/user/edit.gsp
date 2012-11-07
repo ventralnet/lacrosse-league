@@ -34,8 +34,10 @@
 				</tr>
 				<tr>
 					<td><span>Position</span></td>
-					<td><input type="text" class="inputtext" name="position"
-						value="${player?.position}" tabindex="6" /><br /></td>
+					<td>
+                        <g:select name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="${player?.position}"
+                            /></br>
+						</td>
 				</tr>
 			</g:if>
 			<tr>

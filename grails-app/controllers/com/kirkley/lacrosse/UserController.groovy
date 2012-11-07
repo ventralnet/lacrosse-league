@@ -63,12 +63,17 @@ class UserController {
             } else {
                 def contact = new Contact(urc.properties)
                 contact.role = Role.findByType(Role.PLAYER)
-                contact.save()
                 def player = new Player()
                 player.age = urc.age
+                player.position = urc.position
                 player.contact = contact
                 player.team = teamService.getTeam()
                 player.save()
+                
+                if (player.hasErrors()) {
+                    player.errors.each { println it }
+                    throw new RuntimeException("asshole")
+                }
                 session.user = player.contact
                 redirect(controller:'team',action:'index')
             }   

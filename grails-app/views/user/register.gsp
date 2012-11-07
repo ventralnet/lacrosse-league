@@ -77,7 +77,8 @@
                         <span>Position</span>
                     </td>
                     <td>
-                        <input type="text" class="inputtext ${hasErrors(bean:user,field:'position','error')}" name="position" value="${user?.position}" tabindex="6"/><br/>
+                        <g:select name="position" from="${['Attack','Defense','Midfield','Goalie']}" value="Attack"
+                            /></br>
                     </td>
                     <td>
                         <g:eachError var="err" field="position" bean="${user}">
