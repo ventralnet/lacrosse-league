@@ -130,10 +130,10 @@ class InitDatabaseBootStrap {
                     team.save()
                 }
 
-                def location = new Location(contact:createContact(coachRole),fieldName:"Seminary",street:"Alley",city:"Timonium",zipCode:"22121")
-                def location2 = new Location(contact:createContact(coachRole),fieldName:"Heights",street:"Lutherville",city:"CityPlace",zipCode:"22131")
-                def location3 = new Location(contact:createContact(coachRole),fieldName:"Grass Field",street:"3rd",city:"Baltimore",zipCode:"22122")
-                def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th",city:"Cockeysville",zipCode:"21030")
+                def location = new Location(contact:createContact(coachRole),fieldName:"Seminary",street:"Alley Way",city:"Timonium",zipCode:"22121")
+                def location2 = new Location(contact:createContact(coachRole),fieldName:"Heights",street:"Cleghorn Rd",city:"CityPlace",zipCode:"22131")
+                def location3 = new Location(contact:createContact(coachRole),fieldName:"Grass Field",street:"4th Street",city:"Baltimore",zipCode:"22122")
+                def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th Street",city:"Cockeysville",zipCode:"21030")
                 save(location,location2,location3,location4)
     
                 def kirksTeam = fallTeams.find { it.name = 'Kirks' }
