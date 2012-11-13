@@ -30,6 +30,7 @@
     
             <div id="header">
                 <div style="float:left" id="team_name_header">
+                    <g:img dir="images" file="unclesam_lacrosse_400x50.jpg"/>
                     <h1 style="display:inline">The Baltimore Kirks</h1>
                 </div>
                 <g:if test="${session.user}">
