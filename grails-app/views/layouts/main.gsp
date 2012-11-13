@@ -64,10 +64,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
+                                        <input type="text" class="inputtext" name="email" id="email" value tabindex="-1"/>
                                     </td>
                                     <td>
-                                        <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
+                                        <input type="password" class="inputtext" name="password" id="password" tabindex="0"/>
                                     </td>
                                     <td>
                                         <input type="submit" value="Login">
