@@ -63,7 +63,7 @@
                         <span>Age</span>
                     </td>
                     <td>
-                        <input type="text" class="inputtext ${hasErrors(bean:user,field:'age','error')}" name="age" value="${user?.age}" tabindex="5"/><br/>
+                        <input type="number" min="15" class="inputtext ${hasErrors(bean:user,field:'age','error')}" name="age" value="${user?.age}" tabindex="5"/><br/>
                     </td>
                     <td>
                     <td>
