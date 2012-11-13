@@ -26,10 +26,11 @@
 
     <body>
 
-        <div id="body">
+        <div id="main_container">
     
             <div id="header">
                 <div style="float:left" id="team_name_header">
+                    <g:img dir="images" file="unclesam_lacrosse_400x50.jpg"/>
                     <h1 style="display:inline">The Baltimore Kirks</h1>
                 </div>
                 <g:if test="${session.user}">
@@ -63,10 +64,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="text" class="inputtext" name="email" id="email" value tabindex="1"/>
+                                        <input type="text" class="inputtext" name="email" id="email" value tabindex="-1"/>
                                     </td>
                                     <td>
-                                        <input type="password" class="inputtext" name="password" id="password" tabindex="2"/>
+                                        <input type="password" class="inputtext" name="password" id="password" tabindex="0"/>
                                     </td>
                                     <td>
                                         <input type="submit" value="Login">
@@ -84,7 +85,6 @@
                 </g:else>
             </div>
 
-        </div>
 
         <div style="clear:both"/>
 
@@ -92,6 +92,7 @@
             <ul>
                 <li><g:link controller="team">Team Schedule</g:link></li>
                 <li><g:link controller="league" action="standings">League Standings</g:link></li>
+                <li><g:link controller="location" action="show">Locations</g:link></li>
                 <li><g:link controller="team" action="roster">Team Roster</g:link></li>
                 <g:if test="${session.user}">
                     <li><g:link controller="user" action="edit" id="${session.user.id}">Edit Profile</g:link></li>
@@ -103,6 +104,7 @@
         <div style="clear:both"/>
 
         <g:layoutBody/>
+        </div>
     </body>
 
 
