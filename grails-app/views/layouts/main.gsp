@@ -91,6 +91,7 @@
             <ul>
                 <li><g:link controller="team">Team Schedule</g:link></li>
                 <li><g:link controller="league" action="standings">League Standings</g:link></li>
+                <li><g:link controller="location" action="show">Locations</g:link></li>
                 <li><g:link controller="team" action="roster">Team Roster</g:link></li>
                 <g:if test="${session.user}">
                     <li><g:link controller="user" action="edit" id="${session.user.id}">Edit Profile</g:link></li>
