@@ -72,7 +72,7 @@ class UserController {
                 
                 if (player.hasErrors()) {
                     player.errors.each { println it }
-                    throw new RuntimeException("asshole")
+                    throw new RuntimeException("problem saving player")
                 }
                 session.user = player.contact
                 redirect(controller:'team',action:'index')
