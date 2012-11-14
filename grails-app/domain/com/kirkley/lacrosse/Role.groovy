@@ -5,9 +5,9 @@ class Role {
     Integer id
     String type
 
-    public static final String ADMINISTRATOR = "Administrator"
-    public static final String PLAYER = "Player"
-    public static final String COACH = "Coach"
+    public static final String ADMINISTRATOR = "administrator"
+    public static final String PLAYER = "player"
+    public static final String COACH = "coach"
 
     static mapping = {
         table "Role"
