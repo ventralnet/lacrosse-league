@@ -37,7 +37,7 @@ class InitDatabaseBootStrap {
             }
             val
         }
-        "(${n(3)})-${n(3)}-${n(4)}"
+        "${n(3)}-${n(3)}-${n(4)}"
     }
 
     private def randomEmail(firstname,lastname) {
@@ -85,87 +85,87 @@ class InitDatabaseBootStrap {
     }
 
     def init = { servletContext -> 
-        switch(GrailsUtil.environment) {
-            case "development":
-            case "production":
-                def (coachRole,parentPlayerRole,administratorRole) = createRoles()
-
-                def contactAdmin = createContact(administratorRole)
-                def contactAdmin2 = createContact(administratorRole)
-                def contactCoach = createContact(coachRole)
-                def contactCoach2 = createContact(coachRole)
-                def contactPlayer = createContact(parentPlayerRole)
-                def contactPlayer2 = createContact(parentPlayerRole)
-                def contactPlayer3 = createContact(parentPlayerRole)
-
-                def me = new Contact(lastName:'Kirkley',firstName:'Matthew',
-                                                  emailAddress:'matt.kirkley@gmail.com', phoneNumber:randomPhoneNumber(), password:"secret",role:coachRole)
-                me.save()
-
-
-                def league = new League(adminContact:contactAdmin,name:"Fall League",year:2012,season:"FALL")
-                def league2 = new League(adminContact:contactAdmin2,name:"Summer League",year:2012,season:"SUMMER")
-                def league3 = new League(adminContact:contactAdmin,name:"Spring League",year:2012,season:"SPRING")
-                def league4 = new League(adminContact:contactAdmin2,name:"Winter League",year:2012,season:"WINTER")
-                save(league,league2,league3,league4) 
-
-
-                Collections.shuffle(TEAM_NAMES)
-                def fallTeams = []
-                TEAM_NAMES.each { teamName ->
-                    def team = new Team(name:teamName,league:league,coach:createContact(coachRole)).save()
-                    fallTeams << team
-                    team.save()
-                }
-                TEAM_NAMES.each { teamName ->
-                    def team = new Team(name:teamName,league:league2,coach:createContact(coachRole)).save()
-                    team.save()
-                }
-                TEAM_NAMES.each { teamName ->
-                    def team = new Team(name:teamName,league:league3,coach:createContact(coachRole)).save()
-                    team.save()
-                }
-                TEAM_NAMES.each { teamName ->
-                    def team = new Team(name:teamName,league:league4,coach:createContact(coachRole)).save()
-                    team.save()
-                }
-
-                def location = new Location(contact:createContact(coachRole),fieldName:"Seminary",street:"Alley Way",city:"Timonium",zipCode:"22121")
-                def location2 = new Location(contact:createContact(coachRole),fieldName:"Heights",street:"Cleghorn Rd",city:"CityPlace",zipCode:"22131")
-                def location3 = new Location(contact:createContact(coachRole),fieldName:"Grass Field",street:"4th Street",city:"Baltimore",zipCode:"22122")
-                def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th Street",city:"Cockeysville",zipCode:"21030")
-                save(location,location2,location3,location4)
-    
-                def kirksTeam = fallTeams.find { it.name = 'Kirks' }
-                fallTeams.each { team ->
-                    if (team != kirksTeam)  
-                        createTeamRoster(team)
-                }
-
-                def now = System.currentTimeMillis()
-                def day = 86400000 / 2
-                def players = Player.findAllByTeam(kirksTeam)
-                def cal = Calendar.instance
-                cal.set(Calendar.YEAR,2012)
-                def year2012 = cal.time
-                cal.set(Calendar.MINUTE,30)
-                cal.set(Calendar.HOUR, 6)
-                cal.set(Calendar.AM_PM, Calendar.PM)
-                def sixThirty = cal.time
-                cal.set(Calendar.MINUTE, 0)
-                def six = cal.time
-                def game = new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now-(day*6.33) as Long))
-                new Game(homeScore:6,awayScore:4,homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-day as Long)).save()
-                new Game(homeScore:3,awayScore:8,homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-(day*3) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now as Long)).save()
-                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:six,date:new Date(now+day as Long)).save()
-                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now+(day*3) as Long)).save()
-                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location4,time:six,date:new Date(now+(day*4) as Long)).save()
-                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location3,time:sixThirty,date:new Date(now+(day*5) as Long)).save()
-                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[4],location:location,time:six,date:new Date(now+(day*6) as Long)).save()
-                    
-            break
-        } 
+//        switch(GrailsUtil.environment) {
+//            case "development":
+//            case "production":
+//                def (coachRole,parentPlayerRole,administratorRole) = createRoles()
+//
+//                def contactAdmin = createContact(administratorRole)
+//                def contactAdmin2 = createContact(administratorRole)
+//                def contactCoach = createContact(coachRole)
+//                def contactCoach2 = createContact(coachRole)
+//                def contactPlayer = createContact(parentPlayerRole)
+//                def contactPlayer2 = createContact(parentPlayerRole)
+//                def contactPlayer3 = createContact(parentPlayerRole)
+//
+//                def me = new Contact(lastName:'Kirkley',firstName:'Matthew',
+//                                                  emailAddress:'matt.kirkley@gmail.com', phoneNumber:randomPhoneNumber(), password:"secret",role:coachRole)
+//                me.save()
+//
+//
+//                def league = new League(adminContact:contactAdmin,name:"Fall League",year:2012,season:"FALL")
+//                def league2 = new League(adminContact:contactAdmin2,name:"Summer League",year:2012,season:"SUMMER")
+//                def league3 = new League(adminContact:contactAdmin,name:"Spring League",year:2012,season:"SPRING")
+//                def league4 = new League(adminContact:contactAdmin2,name:"Winter League",year:2012,season:"WINTER")
+//                save(league,league2,league3,league4) 
+//
+//
+//                Collections.shuffle(TEAM_NAMES)
+//                def fallTeams = []
+//                TEAM_NAMES.each { teamName ->
+//                    def team = new Team(name:teamName,league:league,coach:createContact(coachRole)).save()
+//                    fallTeams << team
+//                    team.save()
+//                }
+//                TEAM_NAMES.each { teamName ->
+//                    def team = new Team(name:teamName,league:league2,coach:createContact(coachRole)).save()
+//                    team.save()
+//                }
+//                TEAM_NAMES.each { teamName ->
+//                    def team = new Team(name:teamName,league:league3,coach:createContact(coachRole)).save()
+//                    team.save()
+//                }
+//                TEAM_NAMES.each { teamName ->
+//                    def team = new Team(name:teamName,league:league4,coach:createContact(coachRole)).save()
+//                    team.save()
+//                }
+//
+//                def location = new Location(contact:createContact(coachRole),fieldName:"Seminary",street:"Alley Way",city:"Timonium",zipCode:"22121")
+//                def location2 = new Location(contact:createContact(coachRole),fieldName:"Heights",street:"Cleghorn Rd",city:"CityPlace",zipCode:"22131")
+//                def location3 = new Location(contact:createContact(coachRole),fieldName:"Grass Field",street:"4th Street",city:"Baltimore",zipCode:"22122")
+//                def location4 = new Location(contact:createContact(coachRole),fieldName:"Concrete Field",street:"8th Street",city:"Cockeysville",zipCode:"21030")
+//                save(location,location2,location3,location4)
+//    
+//                def kirksTeam = fallTeams.find { it.name = 'Kirks' }
+//                fallTeams.each { team ->
+//                    if (team != kirksTeam)  
+//                        createTeamRoster(team)
+//                }
+//
+//                def now = System.currentTimeMillis()
+//                def day = 86400000 / 2
+//                def players = Player.findAllByTeam(kirksTeam)
+//                def cal = Calendar.instance
+//                cal.set(Calendar.YEAR,2012)
+//                def year2012 = cal.time
+//                cal.set(Calendar.MINUTE,30)
+//                cal.set(Calendar.HOUR, 6)
+//                cal.set(Calendar.AM_PM, Calendar.PM)
+//                def sixThirty = cal.time
+//                cal.set(Calendar.MINUTE, 0)
+//                def six = cal.time
+//                def game = new Game(homeScore:2,awayScore:4,homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now-(day*6.33) as Long))
+//                new Game(homeScore:6,awayScore:4,homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-day as Long)).save()
+//                new Game(homeScore:3,awayScore:8,homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now-(day*3) as Long)).save()
+//                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[1],location:location,time:six,date:new Date(now as Long)).save()
+//                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location2,time:six,date:new Date(now+day as Long)).save()
+//                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location2,time:sixThirty,date:new Date(now+(day*3) as Long)).save()
+//                new Game(homeTeam:fallTeams[2],awayTeam:kirksTeam,location:location4,time:six,date:new Date(now+(day*4) as Long)).save()
+//                new Game(homeTeam:fallTeams[3],awayTeam:kirksTeam,location:location3,time:sixThirty,date:new Date(now+(day*5) as Long)).save()
+//                new Game(homeTeam:kirksTeam,awayTeam:fallTeams[4],location:location,time:six,date:new Date(now+(day*6) as Long)).save()
+//                    
+//            break
+//        } 
     }
 
     def destroy = {
