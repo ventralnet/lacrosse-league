@@ -16,6 +16,7 @@ class League {
     }
 
     static mapping = {
+        table "League"
         id column:'League_ID'
         name column:'Name'
         year column:'Year',sqlType:'year'

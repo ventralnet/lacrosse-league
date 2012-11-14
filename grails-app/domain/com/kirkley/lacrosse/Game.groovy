@@ -22,11 +22,12 @@ class Game {
     }
 
     static mapping = {
+        table "Game"
         sort "date,time"
         id column:'Game_ID'
         homeTeam column:'Home_team', lazy:false
         awayTeam column:'Away_team', lazy:false
-        location lazy:false
+        location column:'Location', lazy:false
         homeScore column:'Home_score'
         awayScore column:'Away_score'
         date column:'Date',sqlType:'date'

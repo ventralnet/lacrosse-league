@@ -15,6 +15,7 @@ class Team {
     }
 
     static mapping = {
+        table "Team"
         id column:'Team_ID'
         name column:'Name'
         league column:'League'

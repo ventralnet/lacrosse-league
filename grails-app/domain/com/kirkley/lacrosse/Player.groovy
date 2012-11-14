@@ -20,8 +20,10 @@ class Player {
     }
 
     static mapping = {
+        table "Player"
         id column:'Player_ID'
-        contact cascade: 'all'
+        contact column:'Contact', cascade: 'all'
+        team column:'Team'
         version false
     }
 }

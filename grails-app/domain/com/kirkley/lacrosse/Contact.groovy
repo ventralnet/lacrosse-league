@@ -18,6 +18,7 @@ class Contact {
     }
 
     static mapping = {
+        table "Contact"
         id column:'Contact_ID'
         lastName column:'Last_name'
         firstName column:'First_name' 

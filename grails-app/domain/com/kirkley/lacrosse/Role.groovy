@@ -10,6 +10,7 @@ class Role {
     public static final String COACH = "Coach"
 
     static mapping = {
+        table "Role"
         id column:'Role_ID'
         version false
     }   

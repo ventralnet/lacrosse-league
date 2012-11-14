@@ -18,6 +18,7 @@ class Location {
     }
 
     static mapping = {
+        table "Location"
         id column:'Location_ID'
         fieldName column:'Field_name'
         street column:'Street'
