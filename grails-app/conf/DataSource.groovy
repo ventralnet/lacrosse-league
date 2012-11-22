@@ -1,8 +1,9 @@
 dataSource {
     pooled = true
-    driverClassName = "com.mysql.jdbc.Driver"
-    username = "root"
-    password = "secret"
+    driverClassName = "org.h2.Driver"
+    //driverClassName = "com.mysql.jdbc.Driver"
+    username = "sa"
+    password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -15,7 +16,8 @@ environments {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             loggingSql = true
-            url = "jdbc:mysql://localhost:3306/matt_lacrosse"
+            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            //url = "jdbc:mysql://localhost:3306/matt_lacrosse"
         }
     }
     test {
