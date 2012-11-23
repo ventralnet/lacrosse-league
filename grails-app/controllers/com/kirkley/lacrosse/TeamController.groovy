@@ -18,6 +18,6 @@ class TeamController {
     def roster() {
         def team = teamService.getTeam()
         def players = Player.findAllByTeam(team)
-        [players:players]
+		[players:players,teamCoach:team.coach]
     }
 }

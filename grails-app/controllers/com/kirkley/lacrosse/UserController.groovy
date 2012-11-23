@@ -61,20 +61,41 @@ class UserController {
             if (urc.hasErrors()) {
                 return [ user : urc ]
             } else {
+				def urcRole = urc.role
+				urc.role = null
                 def contact = new Contact(urc.properties)
-                contact.role = Role.findByType(Role.PLAYER)
-                def player = new Player()
-                player.age = urc.age
-                player.position = urc.position
-                player.contact = contact
-                player.team = teamService.getTeam()
-                player.save()
-                
-                if (player.hasErrors()) {
-                    player.errors.each { println it }
-                    throw new RuntimeException("problem saving player")
-                }
-                session.user = player.contact
+				if (urcRole.toLowerCase() == Role.PLAYER.toLowerCase()) {
+	                def player = new Player()
+					contact.role =  Role.findByType(Role.PLAYER)
+	                player.age = urc.age
+	                player.position = urc.position
+	                player.contact = contact
+	                player.team = teamService.getTeam()
+	                player.save()
+	                
+	                if (player.hasErrors()) {
+	                    player.errors.each { println it }
+	                    throw new RuntimeException("problem saving player")
+	                }
+					session.user = player.contact
+				} else {
+					contact.role =  Role.findByType(Role.COACH)
+					contact.save()
+					if (contact.hasErrors()) {
+						contact.errors.each { println it }
+						throw new RuntimeException("problem saving player")
+					}
+					
+					def team = teamService.getTeam();
+					team.coach = contact
+					team.save()
+					if (team.hasErrors()) {
+						team.errors.each { println it }
+						throw new RuntimeException("problem updating team coach")
+					}
+					session.user = contact;
+				}
+				
                 redirect(controller:'team',action:'index')
             }   
         }
@@ -96,12 +117,19 @@ class UserRegistrationCommand {
     String lastName
     String phoneNumber
     
+	String role
+	
     Short age
     String position
     
     static constraints = {
-        age(blank:false)
-        position(blank:false)
+        age(nullable:true,validator: { age, userRegistrationCommand ->
+                if (userRegistrationCommand.role?.toLowerCase() == Role.PLAYER.toLowerCase()) {
+					if (!age) {
+						return ["blank"]
+					}
+				}
+            })
         firstName(blank:false)
         lastName(blank:false)
         phoneNumber(blank:false)

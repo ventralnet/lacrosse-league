@@ -1,11 +1,39 @@
 <html>
 <meta name="layout" content="main"/>
 
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $("#roleCombo").change(function() {
+        $(".playerField").toggle();
+    });
+
+    <g:if test="${!user?.role || user.role.toLowerCase() == com.kirkley.lacrosse.Role.PLAYER.toLowerCase()}">
+    $('select>option:eq(0)').attr('selected', true);
+    $(".playerField").show();
+    </g:if>
+    <g:else>
+    $('select>option:eq(1)').attr('selected', true);
+    $(".playerField").hide();
+    </g:else>
+});
+    
+</script>
+
 <h1>Register</h1>
 
     <div>
         <g:form name="registerForm" action="register" controller="user">
             <table>
+                <tr>
+                    <td>
+                        <span>Role</span>
+                    </td>
+                    <td>
+                        <g:select id="roleCombo" tabindex="0" name="role" from="${['Player','Coach']}" value="Player"
+                            /></br>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <span>Email</span>
@@ -58,7 +86,7 @@
                         </g:eachError>
                     </td>
                 </tr>
-                <tr>
+                <tr class="playerField">
                     <td>
                         <span>Age</span>
                     </td>
@@ -66,13 +94,12 @@
                         <input type="number" min="15" class="inputtext ${hasErrors(bean:user,field:'age','error')}" name="age" value="${user?.age}" tabindex="5"/><br/>
                     </td>
                     <td>
-                    <td>
                         <g:eachError var="err" field="age" bean="${user}">
                             <g:message error="${err}"/>
                         </g:eachError>
                     </td>
                 </tr>
-                <tr>
+                <tr class="playerField">
                     <td>
                         <span>Position</span>
                     </td>

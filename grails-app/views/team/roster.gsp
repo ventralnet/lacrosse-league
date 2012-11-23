@@ -5,6 +5,11 @@
     <h1>Kirks Team Roster</h1>
 
     <table>
+        <tr>
+            <td>
+                Coached By: ${teamCoach.firstName} ${teamCoach.lastName}
+            </td>
+        </tr>
         <g:each in="${players}">
             <tr>
                <td>${it.contact.lastName}, ${it.contact.firstName}</td> 
