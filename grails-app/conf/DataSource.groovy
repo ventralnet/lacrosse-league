@@ -1,9 +1,9 @@
 dataSource {
     pooled = true
-    driverClassName = "org.h2.Driver"
-    //driverClassName = "com.mysql.jdbc.Driver"
-    username = "sa"
-    password = ""
+    //driverClassName = "org.h2.Driver"
+    driverClassName = "com.mysql.jdbc.Driver"
+    username = "projectuser"
+    password = "pwfall2012"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -14,10 +14,10 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
             loggingSql = true
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-            //url = "jdbc:mysql://localhost:3306/matt_lacrosse"
+//            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://web3.apl.jhu.edu:3306/project_db_fall12"
         }
     }
     test {
@@ -28,9 +28,9 @@ environments {
     }
     production {
         dataSource {
-                dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+                dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
                 loggingSql = true
-                url = "jdbc:mysql://localhost:3306/matt_lacrosse"
+                url = "jdbc:mysql://web3.apl.jhu.edu:3306/project_db_fall12"
             }
     }
 }

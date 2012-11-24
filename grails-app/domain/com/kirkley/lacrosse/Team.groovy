@@ -17,7 +17,7 @@ class Team {
     static mapping = {
         table "Team"
         id column:'Team_ID'
-        name column:'Name'
+        name column:'Team_name'
         league column:'League'
         coach column:'Coach'
         version false

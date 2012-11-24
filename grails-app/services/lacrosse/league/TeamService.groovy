@@ -8,7 +8,7 @@ class TeamService {
 
     def getTeam() {
         def league = leagueService.getCurrentLeague()
-        def team = Team.findByNameAndLeague('Kirks',league)
+        def team = Team.findByNameAndLeague('Team 7',league)
         return team;
     }
 

@@ -5,7 +5,7 @@ import com.kirkley.lacrosse.League
 class LeagueService {
 
     def getCurrentLeague() {
-        def league = League.findBySeasonAndYear("FALL",2012)
+        def league = League.findBySeasonAndYear("Fall",2012)
         league
     }
 }
