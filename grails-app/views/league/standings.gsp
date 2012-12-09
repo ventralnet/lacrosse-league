@@ -11,11 +11,11 @@
             <th>Total Games Played</th>
         </tr>
         <g:each in="${teamStats}">
-            <tr>
+            <tr id="standings_row">
                <td>${it.team.name}</td> 
-               <td>${it.winningGames.size()}</td>
-               <td>${it.losingGames.size()}</td>
-               <td>${it.totalGames.size()}</td>
+               <td style="text-align:center">${it.winningGames.size()}</td>
+               <td style="text-align:center">${it.losingGames.size()}</td>
+               <td style="text-align:center">${it.totalGames.size()}</td>
             </tr>
         </g:each>
     </table>
