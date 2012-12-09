@@ -31,6 +31,21 @@ environments {
                 dbCreate = "validate" // one of 'create', 'create-drop', 'update', 'validate', ''
                 loggingSql = true
                 url = "jdbc:mysql://web3.apl.jhu.edu:3306/project_db_fall12"
+                properties { 
+                    testWhileIdle=true 
+                    testOnBorrow=true 
+                    testOnReturn=false 
+                    validationQuery="SELECT 1" 
+                    validationInterval=30000 
+                    timeBetweenEvictionRunsMillis=5000 
+                    maxActive=100 
+                    minIdle=10 
+                    maxWait=10000 
+                    initialSize=10 
+                    removeAbandonedTimeout=60 
+                    removeAbandoned=true 
+                    minEvictableIdleTimeMillis=30000 
+                } 
             }
     }
 }
